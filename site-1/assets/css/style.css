@@ -1,0 +1,146 @@
+/* main color #593221 */
+
+/* 
+font-family: 'Oleo Script Swash Caps', cursive;
+font-family: 'Nanum Gothic Coding', monospace;
+*/
+:root {
+    --main-color: #593221;
+    --accent-color: #b37c18;
+    --bg-color: #fcfcfc;
+    --main-font: 'Nanum Gothic Coding', monospace;
+    --standard-font: 'Oleo Script Swash Caps', cursive;
+}
+
+body{
+	margin: 0;
+	font-family: var(--main-font);
+}
+
+header{
+	height: 400px;
+	/*background-image: url(../img/big-jerky.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;*/
+
+    background: url(../img/big-jerky.jpg) no-repeat center / cover;
+}
+
+nav{
+    padding: 10px 25px;
+    box-shadow: 0 1px 5px 0px #000000a6;
+    z-index: 1;
+    position: relative;
+}
+
+nav ul{
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	list-style: none;
+	float: right;
+}
+
+nav ul > li{
+	display: inline-block;
+	padding: 0 10px;
+}
+
+nav ul > li > a{
+	color: var(--main-color);
+	font-family: var(--standard-font);
+	text-decoration: none;
+	display: block;
+	line-height: 53px;
+	transition: color 0.5s;
+}
+
+nav ul > li:hover > a{
+	color: var(--accent-color);
+}
+
+main{
+	background: var(--bg-color);
+}
+
+main section:first-of-type{
+	width: 75%;
+	display: inline-block;
+	float: left;
+	padding: 25px;
+	/*includes padding and border in width*/
+	box-sizing: border-box;
+}
+
+main aside{
+	width: 25%;
+	display: inline-block;
+	float: left;
+	padding: 25px;
+	/*includes padding and border in width*/
+	box-sizing: border-box;
+}
+
+.social-media a{
+    font-size: 28px;
+	text-decoration: none;
+}
+
+.fa-facebook{
+	color: #3b5998;
+}
+
+.fa-twitter-square{
+	color: #1DA1F2;
+}
+
+.fa-google-plus-square{
+	color: #DB4437;
+}
+
+.fa-linkedin{
+	color: #0077B5;
+}
+
+.fa-instagram{
+	color: #262626;
+}
+
+.cta{
+	padding: 50px;
+	background: url(../img/small-jerky.jpg) no-repeat center fixed / cover;
+}
+
+footer{
+	background: #222;
+	padding: 25px;
+	color: #fcfcfc;
+}
+
+footer article,
+footer aside{
+	width: 33%;
+	float: left;
+	box-sizing: border-box;
+	padding: 15px;
+}
+
+footer aside img{
+	width: 33%;
+    border: 5px solid transparent;
+    float: left;
+    box-sizing: border-box;
+}
+
+footer ul{
+	list-style: none;
+}
+
+footer a{
+	color:#fcfcfc;
+	text-decoration: none;
+	display: block;
+	margin: 10px 0;
+	font-size: 20px;
+}

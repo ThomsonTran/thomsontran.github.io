@@ -1,0 +1,25 @@
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.fluid{
+	width: 100%;
+}
+
+.circle{
+	border-radius: 50%;
+}
+
+.center{
+	text-align: center;
+}
+
+.btn{
+	display: inline-block;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: black;
+	border: 1px solid black;
+}
