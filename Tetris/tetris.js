@@ -5,10 +5,10 @@ canvas.addEventListener("click", function() {
     startGame();
 });
 
-const stop = document.getElementById("stop");
-stop.addEventListener("click", function() {
-    bgTheme.stop();
-});
+// const stop = document.getElementById("stop");
+// stop.addEventListener("click", function() {
+//     bgTheme.stop();
+// });
 
 context.scale(20, 20);
 
