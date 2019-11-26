@@ -16,11 +16,6 @@ canvas.addEventListener(
 
 context.scale(20, 20);
 
-context.font = "30px Comic Sans MS";
-context.fillStyle = "white";
-context.textAlign = "center";
-context.fillText("Hello World", canvas.width / 2, canvas.height / 2);
-
 function arenaSweep() {
     let rowCount = 1;
     outer: for (let y = arena.length - 1; y > 0; --y) {
@@ -33,6 +28,7 @@ function arenaSweep() {
         const row = arena.splice(y, 1)[0].fill(0);
         arena.unshift(row);
         ++y;
+        goodjob.play();
 
         player.score += rowCount * 10;
         rowCount *= 2;
@@ -262,14 +258,16 @@ const colors = [
 
 const arena = createMatrix(12, 20);
 
-function sound(src) {
+function sound(src, loop = null) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
     this.sound.volume = 0.1;
-    this.sound.loop = true;
+    if (loop != null) {
+        this.sound.loop = true;
+    }
     document.body.appendChild(this.sound);
     this.play = function() {
         this.sound.play();
@@ -284,7 +282,8 @@ const player = {
     matrix: null,
     score: 0
 };
-var bgTheme = new sound("Tetris.mp3");
+var bgTheme = new sound("Tetris.mp3", 1);
+var goodjob = new sound("goodjob.wav");
 
 function startGame() {
     bgTheme.play();
