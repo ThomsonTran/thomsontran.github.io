@@ -1,7 +1,21 @@
 const canvas = document.getElementById("tetris");
 const context = canvas.getContext("2d");
 
+canvas.addEventListener("click", function() {
+    startGame();
+});
+
+const stop = document.getElementById("stop");
+stop.addEventListener("click", function() {
+    bgTheme.stop();
+});
+
 context.scale(20, 20);
+
+context.font = "30px Comic Sans MS";
+context.fillStyle = "white";
+context.textAlign = "center";
+context.fillText("Hello World", canvas.width / 2, canvas.height / 2);
 
 function arenaSweep() {
     let rowCount = 1;
@@ -243,12 +257,33 @@ const colors = [
 
 const arena = createMatrix(12, 20);
 
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    this.sound.volume = 0.1;
+    this.sound.loop = true;
+    document.body.appendChild(this.sound);
+    this.play = function() {
+        this.sound.play();
+    };
+    this.stop = function() {
+        this.sound.pause();
+    };
+}
+
 const player = {
     pos: { x: 0, y: 0 },
     matrix: null,
     score: 0
 };
+var bgTheme = new sound("Tetris.mp3");
 
-playerReset();
-updateScore();
-update();
+function startGame() {
+    bgTheme.play();
+    playerReset();
+    updateScore();
+    update();
+}
