@@ -163,6 +163,10 @@ function playerDrop() {
 }
 
 function playerMove(offset) {
+    if (dropTotal > 15) {
+        dropTotal = 0;
+        dropInterval -= 50;
+    }
     player.pos.x += offset;
     if (collide(arena, player)) {
         player.pos.x -= offset;
@@ -198,7 +202,7 @@ function playerRotate(dir) {
 
 let dropCounter = 0;
 let dropInterval = 1000;
-
+let dropTotal = 0;
 let lastTime = 0;
 function update(time = 0) {
     const deltaTime = time - lastTime;
@@ -206,8 +210,8 @@ function update(time = 0) {
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
         playerDrop();
+        dropTotal++;
     }
-
     lastTime = time;
 
     draw();
@@ -217,6 +221,7 @@ function update(time = 0) {
 function hitBottom() {
     player.pos.y++;
     if (collide(arena, player)) {
+        dropTotal++;
         player.pos.y--;
         merge(arena, player);
         playerReset();
@@ -296,4 +301,6 @@ function endGame() {
     arena.forEach(row => row.fill(0));
     player.score = 0;
     updateScore();
+    dropTotal = 0;
+    dropInterval = 1000;
 }
