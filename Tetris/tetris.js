@@ -1,9 +1,13 @@
 const canvas = document.getElementById("tetris");
 const context = canvas.getContext("2d");
 
-canvas.addEventListener("click", function() {
-    startGame();
-});
+canvas.addEventListener(
+    "click",
+    function() {
+        startGame();
+    },
+    { once: true }
+);
 
 // const stop = document.getElementById("stop");
 // stop.addEventListener("click", function() {
@@ -110,6 +114,8 @@ function drawMatrix(matrix, offset) {
         row.forEach((value, x) => {
             if (value !== 0) {
                 context.fillStyle = colors[value];
+                context.shadowBlur = 3;
+                context.shadowColor = "white";
                 context.fillRect(x + offset.x, y + offset.y, 1, 1);
             }
         });
@@ -168,15 +174,14 @@ function playerMove(offset) {
 }
 
 function playerReset() {
+    dropCounter = 0;
     const pieces = "TJLOSZI";
     player.matrix = createPiece(pieces[(pieces.length * Math.random()) | 0]);
     player.pos.y = 0;
     player.pos.x =
         ((arena[0].length / 2) | 0) - ((player.matrix[0].length / 2) | 0);
     if (collide(arena, player)) {
-        arena.forEach(row => row.fill(0));
-        player.score = 0;
-        updateScore();
+        endGame();
     }
 }
 
@@ -286,4 +291,10 @@ function startGame() {
     playerReset();
     updateScore();
     update();
+}
+
+function endGame() {
+    arena.forEach(row => row.fill(0));
+    player.score = 0;
+    updateScore();
 }
