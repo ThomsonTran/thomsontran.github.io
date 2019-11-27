@@ -13,7 +13,9 @@ canvas.addEventListener(
 // stop.addEventListener("click", function() {
 //     bgTheme.stop();
 // });
-
+context.fillStyle = "white";
+context.textAlign = "center";
+context.fillText("Click here to play", canvas.width / 2, canvas.height / 2);
 context.scale(20, 20);
 
 function arenaSweep() {
