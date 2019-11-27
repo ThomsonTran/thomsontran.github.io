@@ -164,11 +164,13 @@ function playerDrop() {
     dropCounter = 0;
 }
 
-function playerMove(offset) {
+function increaseSpeed() {
     if (dropTotal > 15) {
         dropTotal = 0;
         dropInterval -= 50;
     }
+}
+function playerMove(offset) {
     player.pos.x += offset;
     if (collide(arena, player)) {
         player.pos.x -= offset;
@@ -208,14 +210,13 @@ let dropTotal = 0;
 let lastTime = 0;
 function update(time = 0) {
     const deltaTime = time - lastTime;
-
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
         playerDrop();
         dropTotal++;
     }
     lastTime = time;
-
+    increaseSpeed();
     draw();
     requestAnimationFrame(update);
 }
