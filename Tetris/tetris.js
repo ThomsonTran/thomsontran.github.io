@@ -9,9 +9,18 @@ canvas.addEventListener(
     { once: true }
 );
 
+var str = "Click here to play \nArrow keys to move \nSpacebar to hard drop";
+var lineheight = 15;
+var lines = str.split("\n");
+
 context.fillStyle = "white";
 context.textAlign = "center";
-context.fillText("Click here to play", canvas.width / 2, canvas.height / 2);
+for (var j = 0; j < lines.length; j++)
+    context.fillText(
+        lines[j],
+        canvas.width / 2,
+        canvas.height / 3 + j * lineheight
+    );
 context.scale(20, 20);
 
 function arenaSweep() {
@@ -161,9 +170,20 @@ function playerDrop() {
 }
 
 function increaseSpeed() {
-    if (dropTotal > 15) {
+    if (dropTotal > 15 && dropInterval > 500) {
         dropTotal = 0;
         dropInterval -= 50;
+        return true;
+    }
+    if (dropTotal > 15 && dropInterval > 200) {
+        dropTotal = 0;
+        dropInterval -= 20;
+        return true;
+    }
+    if (dropTotal > 15 && dropInterval > 100) {
+        dropTotal = 0;
+        dropInterval -= 5;
+        return true;
     }
 }
 function playerMove(offset) {
