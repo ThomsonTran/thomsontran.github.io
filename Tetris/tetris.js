@@ -15,6 +15,7 @@ var lines = str.split("\n");
 
 context.fillStyle = "white";
 context.textAlign = "center";
+context.font = 12 + "px Arial";
 for (var j = 0; j < lines.length; j++)
     context.fillText(
         lines[j],
