@@ -9,10 +9,6 @@ canvas.addEventListener(
     { once: true }
 );
 
-// const stop = document.getElementById("stop");
-// stop.addEventListener("click", function() {
-//     bgTheme.stop();
-// });
 context.fillStyle = "white";
 context.textAlign = "center";
 context.fillText("Click here to play", canvas.width / 2, canvas.height / 2);
@@ -227,9 +223,6 @@ function hitBottom() {
         dropTotal++;
         player.pos.y--;
         merge(arena, player);
-        playerReset();
-        arenaSweep();
-        updateScore();
     } else hitBottom();
 }
 
@@ -250,6 +243,9 @@ document.addEventListener("keydown", event => {
         playerRotate(1);
     } else if (event.keyCode === 32) {
         hitBottom();
+        playerReset();
+        arenaSweep();
+        updateScore();
     }
 });
 
@@ -285,13 +281,14 @@ function sound(src, loop = null) {
     };
 }
 
+var bgTheme = new sound("Tetris.mp3", 1);
+var goodjob = new sound("goodjob.wav");
+
 const player = {
     pos: { x: 0, y: 0 },
     matrix: null,
     score: 0
 };
-var bgTheme = new sound("Tetris.mp3", 1);
-var goodjob = new sound("goodjob.wav");
 
 function startGame() {
     bgTheme.play();
