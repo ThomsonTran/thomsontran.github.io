@@ -10,7 +10,7 @@
     }
 </style>
 <html>
-   <head>
+    <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title></title>
@@ -19,6 +19,17 @@
         <link rel="stylesheet" href="" />
     </head>
     <body>
+        <div class="slidecontainer">
+            <p>Change x</p>
+            <input
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+                class="slider"
+                id="myRange"
+            />
+        </div>
         <canvas id="scene"></canvas>
 
         <script src="canvas.js"></script>
