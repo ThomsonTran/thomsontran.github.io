@@ -8,8 +8,7 @@ window.addEventListener("resize", function (e) {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 });
-
-var colorArray = ["#C98B49", "#171719", "#404896", "#5FA3EE"];
+var colorArray = ["#E7717D", "#C2CAD0", "#7E685A", "#AFD275"];
 var circleArray = [];
 
 var maxRadius = 70;
