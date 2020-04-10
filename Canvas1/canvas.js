@@ -73,9 +73,8 @@ function init() {
         var radius = Math.random() * 5 + 5;
         var x = Math.random() * (canvas.width - radius) + radius;
         var y = Math.random() * (canvas.height - radius) + radius;
-        var dx = (Math.random() - 0.5) * 10;
-        var dy = (Math.random() - 0.5) * 10;
-
+        var dx = (Math.random() - 0.5) * 8;
+        var dy = (Math.random() - 0.5) * 8;
         circleArray.push(new Circle(x, y, dy, dx, radius));
     }
 
@@ -90,4 +89,3 @@ function animate() {
     requestAnimationFrame(animate);
 }
 init();
-// //draw circles
