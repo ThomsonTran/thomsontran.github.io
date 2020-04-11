@@ -10,13 +10,24 @@ window.addEventListener("resize", function (e) {
     canvas.width = window.innerWidth * 0.8;
 });
 
-//slider
-var slider = document.getElementById("myRange");
+//sliders
+var slider = document.getElementById("numSlider");
 slider.oninput = function () {
     numOfCircles = this.value;
     init();
 };
 
+var slider2 = document.getElementById("sizeSlider");
+var sizeCoefficient = 1;
+slider2.oninput = function () {
+    sizeCoefficient = 2 * Math.log(this.value);
+};
+
+var slider3 = document.getElementById("canvasSlider");
+slider3.oninput = function () {
+    canvas.height = window.innerHeight * (this.value / 100);
+    canvas.width = window.innerWidth * (this.value / 100);
+};
 //mouse
 
 var mouseX;
@@ -55,17 +66,20 @@ function Circle(x, y, dy, dx, radius) {
 
     this.draw = function () {
         c.beginPath();
-        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        c.fillStyle = this.color;
-        c.fill();
+        c.arc(this.x, this.y, sizeCoefficient * this.radius, 0, 2 * Math.PI);
+        c.strokeStyle = this.color;
+        c.lineWidth = 1;
         c.stroke();
     };
 
     this.update = function () {
-        if (this.x + this.radius > canvas.width || this.x - this.radius <= 0) {
+        if (this.x + this.radius >= canvas.width || this.x - this.radius <= 0) {
             this.dx = -this.dx;
         }
-        if (this.y + this.radius > canvas.height || this.y - this.radius <= 0) {
+        if (
+            this.y + this.radius >= canvas.height ||
+            this.y - this.radius <= 0
+        ) {
             this.dy = -this.dy;
         }
         this.x += this.dx;
