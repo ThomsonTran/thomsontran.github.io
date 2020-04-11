@@ -2,12 +2,12 @@
 const canvas = document.getElementById("scene");
 const c = canvas.getContext("2d");
 
-canvas.height = window.innerHeight * 0.5;
-canvas.width = window.innerWidth * 0.5;
+canvas.height = window.innerHeight * 0.8;
+canvas.width = window.innerWidth * 0.8;
 
 window.addEventListener("resize", function (e) {
-    canvas.height = window.innerHeight * 0.5;
-    canvas.width = window.innerWidth * 0.5;
+    canvas.height = window.innerHeight * 0.8;
+    canvas.width = window.innerWidth * 0.8;
 });
 
 //slider
@@ -17,20 +17,28 @@ slider.oninput = function () {
     init();
 };
 
+//mouse
+
+var mouseX;
+var mouseY;
+
+function getCursorPosition(canvas, event) {
+    let rect = canvas.getBoundingClientRect();
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+}
+canvas.addEventListener("mousemove", function (e) {
+    getCursorPosition(canvas, e);
+});
+
 // animation set up
 var colorArray = ["#E7717D", "#C2CAD0", "#7E685A", "#AFD275"];
 var circleArray = [];
 
 var maxRadius = 70;
-var numOfCircles = 1400;
+var numOfCircles = 1000;
 
 var requestAnimation;
-var mouseX;
-var mouseY;
-window.addEventListener("mousemove", function (e) {
-    mouseX = e.x;
-    mouseY = e.y;
-});
 
 function Circle(x, y, dy, dx, radius) {
     const randomIndexOfColorArray = Math.floor(
@@ -54,16 +62,16 @@ function Circle(x, y, dy, dx, radius) {
     };
 
     this.update = function () {
-        this.ifCircleIsCloseToMouseIncreaseRadius();
-
-        if (this.x + radius > canvas.width || this.x - radius <= 0) {
+        if (this.x + this.radius > canvas.width || this.x - this.radius <= 0) {
             this.dx = -this.dx;
         }
-        if (this.y + radius > canvas.height || this.y - radius <= 0) {
+        if (this.y + this.radius > canvas.height || this.y - this.radius <= 0) {
             this.dy = -this.dy;
         }
         this.x += this.dx;
         this.y += this.dy;
+
+        this.ifCircleIsCloseToMouseIncreaseRadius();
 
         this.draw();
     };
@@ -76,7 +84,7 @@ function Circle(x, y, dy, dx, radius) {
             mouseY - this.y > -35
         ) {
             if (this.radius < maxRadius) {
-                this.radius += 2;
+                this.radius += 1;
             }
         } else if (this.radius > this.minRadius) {
             this.radius -= 1;
@@ -85,13 +93,6 @@ function Circle(x, y, dy, dx, radius) {
 }
 
 function init() {
-    // var radius = Math.random() * 5 + 5;
-    // var x = Math.random() * (canvas.width - 4 * radius) + 2 * radius;
-    // var y = Math.random() * (canvas.height - 4 * radius) + 2 * radius;
-    // var dx = 1;
-    // var dy = 1;
-    // circleArray.push(new Circle(x, y, dy, dx, radius));
-
     circleArray = [];
     for (let index = 0; index < numOfCircles; index++) {
         let radius = Math.random() * 5 + 5;

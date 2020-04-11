@@ -3,10 +3,27 @@
 <style>
     * {
         margin: 0px;
+        border: 1px solid red;
     }
 
     canvas {
-        border: 1px solid black;
+        outline: solid 2px blue;
+    }
+    .slide {
+        width: 30%;
+        float: left;
+    }
+
+    .slidescontainer {
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .wrapper {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
     }
 </style>
 <html>
@@ -19,18 +36,44 @@
         <link rel="stylesheet" href="" />
     </head>
     <body>
-        <div class="slidecontainer">
-            <p>Change x</p>
-            <input
-                type="range"
-                min="1"
-                max="100"
-                value="50"
-                class="slider"
-                id="myRange"
-            />
+        <div class="wrapper">
+            <div class="slidescontainer">
+                <div class="slide">
+                    <p>Number of balls</p>
+                    <input
+                        type="range"
+                        min="1"
+                        max="2000"
+                        value="1000"
+                        class="slider"
+                        id="myRange"
+                    />
+                </div>
+                <div class="slide">
+                    <p>Number of balls</p>
+                    <input
+                        type="range"
+                        min="1"
+                        max="2000"
+                        value="1000"
+                        class="slider"
+                        id="myRange"
+                    />
+                </div>
+                <div class="slide">
+                    <p>Number of balls</p>
+                    <input
+                        type="range"
+                        min="1"
+                        max="2000"
+                        value="1000"
+                        class="slider"
+                        id="myRange"
+                    />
+                </div>
+            </div>
+            <canvas id="scene"></canvas>
         </div>
-        <canvas id="scene"></canvas>
 
         <script src="canvas.js"></script>
     </body>
