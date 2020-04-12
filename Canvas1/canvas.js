@@ -5,15 +5,18 @@ const c = canvas.getContext("2d");
 canvas.height = window.innerHeight * 0.6;
 canvas.width = window.innerWidth * 0.6;
 
-window.addEventListener("resize", function (e) {
-    canvas.width = window.innerWidth * 0.6;
+var windowSizeCoefficient = 0.6;
 
+window.addEventListener("resize", function (e) {
     if (this.window.innerWidth > 1000) {
-        canvas.height = window.innerHeight * 0.6 - 75;
-    } else {
-        canvas.height = window.innerHeight * 0.6 - 200;
+        changeCanvasSize();
     }
 });
+
+function changeCanvasSize() {
+    canvas.width = window.innerWidth * windowSizeCoefficient;
+    canvas.height = window.innerHeight * windowSizeCoefficient;
+}
 
 //sliders
 var numSlider = document.getElementById("numSlider");
@@ -29,8 +32,8 @@ sizeSlider.oninput = function () {
 
 var canvasSlider = document.getElementById("canvasSlider");
 canvasSlider.oninput = function () {
-    canvas.height = window.innerHeight * (this.value / 100);
-    canvas.width = window.innerWidth * (this.value / 100);
+    windowSizeCoefficient = this.value / 100;
+    changeCanvasSize();
 };
 
 //mouse
@@ -106,11 +109,11 @@ function Circle(x, y, dy, dx, radius) {
         this.x += this.dx;
         this.y += this.dy;
 
-        this.ifCircleIsCloseToMouseIncreaseRadius();
+        this.ifCircleIsCloseToMouseChangeOpacity();
         this.draw();
     };
 
-    this.ifCircleIsCloseToMouseIncreaseRadius = function () {
+    this.ifCircleIsCloseToMouseChangeOpacity = function () {
         if (
             mouseX - this.x < 70 &&
             mouseX - this.x > -70 &&
