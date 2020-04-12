@@ -112,10 +112,11 @@ function Circle(x, y, dy, dx, radius) {
             mouseY - this.y > -70 &&
             this.opacity <= 1
         ) {
-            this.opacity += 0.2;
+            this.opacity += 0.1;
             this.opacity = Math.min(1, this.opacity);
-        } else if (this.opacity != 0) {
-            this.opacity = 0;
+        } else if (this.opacity > 0) {
+            this.opacity -= 0.05;
+            this.opacity = Math.max(0, this.opacity);
         }
     };
 }
