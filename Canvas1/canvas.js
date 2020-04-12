@@ -6,8 +6,13 @@ canvas.height = window.innerHeight * 0.6;
 canvas.width = window.innerWidth * 0.6;
 
 window.addEventListener("resize", function (e) {
-    canvas.height = window.innerHeight * 0.6;
     canvas.width = window.innerWidth * 0.6;
+
+    if (this.window.innerWidth > 1000) {
+        canvas.height = window.innerHeight * 0.6 - 75;
+    } else {
+        canvas.height = window.innerHeight * 0.6 - 200;
+    }
 });
 
 //sliders
