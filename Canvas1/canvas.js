@@ -57,6 +57,7 @@ canvas.addEventListener("mouseout", function (e) {
 // animation set up
 var sizeCoefficient = 1;
 var startOfCanvas = 0;
+
 var colorArray = ["#384C66", "#539DFF", "#7EABE6", "#575D66"];
 var circleArray = [];
 
@@ -72,8 +73,9 @@ function Circle(x, y, dy, dx, radius) {
 
     this.x = x;
     this.y = y;
-    this.dx = dx;
+    this.dx = dx; //thess variable can be renamed to be more clear
     this.dy = dy;
+
     this.radius = radius;
     this.minRadius = radius;
     this.color = colorArray[randomIndexOfColorArray];
@@ -94,6 +96,14 @@ function Circle(x, y, dy, dx, radius) {
     };
 
     this.update = function () {
+        this.reverseDirectionOnWallCollision();
+        this.x += this.dx;
+        this.y += this.dy;
+        this.ifCircleIsCloseToMouseChangeOpacity();
+        this.draw();
+    };
+
+    this.reverseDirectionOnWallCollision = function () {
         if (
             this.x + this.radius * sizeCoefficient >= canvas.width ||
             this.x - this.radius * sizeCoefficient <= startOfCanvas
@@ -106,11 +116,6 @@ function Circle(x, y, dy, dx, radius) {
         ) {
             this.dy = -this.dy;
         }
-        this.x += this.dx;
-        this.y += this.dy;
-
-        this.ifCircleIsCloseToMouseChangeOpacity();
-        this.draw();
     };
 
     this.ifCircleIsCloseToMouseChangeOpacity = function () {
