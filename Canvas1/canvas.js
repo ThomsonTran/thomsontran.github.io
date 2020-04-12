@@ -2,34 +2,33 @@
 const canvas = document.getElementById("scene");
 const c = canvas.getContext("2d");
 
-canvas.height = window.innerHeight * 0.8;
-canvas.width = window.innerWidth * 0.8;
+canvas.height = window.innerHeight * 0.6;
+canvas.width = window.innerWidth * 0.6;
 
 window.addEventListener("resize", function (e) {
-    canvas.height = window.innerHeight * 0.7;
-    canvas.width = window.innerWidth * 0.7;
+    canvas.height = window.innerHeight * 0.6;
+    canvas.width = window.innerWidth * 0.6;
 });
 
 //sliders
-var slider = document.getElementById("numSlider");
-slider.oninput = function () {
+var numSlider = document.getElementById("numSlider");
+numSlider.oninput = function () {
     numOfCircles = this.value;
     init();
 };
 
-var slider2 = document.getElementById("sizeSlider");
-var sizeCoefficient = 1;
-slider2.oninput = function () {
-    sizeCoefficient = 2 * Math.log(this.value);
+var sizeSlider = document.getElementById("sizeSlider");
+sizeSlider.oninput = function () {
+    sizeCoefficient = this.value / 4;
 };
 
-var slider3 = document.getElementById("canvasSlider");
-slider3.oninput = function () {
+var canvasSlider = document.getElementById("canvasSlider");
+canvasSlider.oninput = function () {
     canvas.height = window.innerHeight * (this.value / 100);
     canvas.width = window.innerWidth * (this.value / 100);
 };
-//mouse
 
+//mouse
 var mouseX;
 var mouseY;
 
@@ -48,6 +47,8 @@ canvas.addEventListener("mouseout", function (e) {
 });
 
 // animation set up
+var sizeCoefficient = 1;
+var startOfCanvas = 0;
 var colorArray = ["#384C66", "#539DFF", "#7EABE6", "#575D66"];
 var circleArray = [];
 
@@ -87,13 +88,13 @@ function Circle(x, y, dy, dx, radius) {
     this.update = function () {
         if (
             this.x + this.radius * sizeCoefficient >= canvas.width ||
-            this.x - this.radius * sizeCoefficient <= 0
+            this.x - this.radius * sizeCoefficient <= startOfCanvas
         ) {
             this.dx = -this.dx;
         }
         if (
             this.y + this.radius * sizeCoefficient >= canvas.height ||
-            this.y - this.radius * sizeCoefficient <= 0
+            this.y - this.radius * sizeCoefficient <= startOfCanvas
         ) {
             this.dy = -this.dy;
         }
@@ -125,6 +126,8 @@ function init() {
     circleArray = [];
     for (let index = 0; index < numOfCircles; index++) {
         let radius = Math.random() * 10 + 2;
+
+        //spawms circles away from edge of canvas to avoid collision with edges on start
         let x =
             Math.random() * (canvas.width - 4 * radius * sizeCoefficient) +
             2 * radius * sizeCoefficient;

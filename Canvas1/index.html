@@ -3,19 +3,47 @@
 <style>
     * {
         margin: 0px;
-        border: 1px solid red;
+    }
+
+    body {
+        background-color: #ffe7cc;
+        padding-top: 20px;
     }
 
     canvas {
-        outline: solid 2px blue;
+        outline: solid 2px#2F4858;
     }
+
+    input {
+        -webkit-appearance: none;
+        height: 14px;
+        width: 100%;
+        margin-top: 2px;
+        margin-bottom: 14px;
+        background: #436970 0%;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        zoom: 130%;
+    }
+
+    input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 10px;
+        height: 20px;
+        background: #c8c9ab;
+        position: relative;
+        z-index: 3;
+    }
+
     .slide {
         width: 30%;
-        float: left;
     }
 
     .slidescontainer {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
+        width: 50%;
         display: flex;
         justify-content: space-between;
     }
@@ -24,6 +52,21 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+    }
+
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        white-space: nowrap;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .slidescontainer {
+            flex-direction: column;
+        }
+
+        .slide {
+            width: 100%;
+        }
     }
 </style>
 <html>
@@ -39,7 +82,7 @@
         <div class="wrapper">
             <div class="slidescontainer">
                 <div class="slide">
-                    <p>Number of circles</p>
+                    <p>Number of Circles</p>
                     <input
                         type="range"
                         min="1"
@@ -54,8 +97,8 @@
                     <input
                         type="range"
                         min="1"
-                        max="10"
-                        value="3"
+                        max="20"
+                        value="4"
                         class="slider"
                         id="sizeSlider"
                     />
@@ -66,7 +109,7 @@
                         type="range"
                         min="1"
                         max="90"
-                        value="70"
+                        value="60"
                         class="slider"
                         id="canvasSlider"
                     />
