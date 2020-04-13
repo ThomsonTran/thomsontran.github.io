@@ -9,7 +9,8 @@ const mouse = {
     y: 0,
 };
 
-const colors = [];
+const colorsArray = ["#E0E79F", "#6CAA84", "#3E595F", "#493A4D", "#21172E"];
+let circlesArray;
 
 // global functions
 
@@ -18,7 +19,7 @@ function randomIntFromRange(min, max) {
 }
 
 function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)];
+    return colors[Math.floor(Math.random() * colorsArray.length)];
 }
 
 function distance(x1, y1, x2, y2) {
@@ -40,10 +41,12 @@ addEventListener("resize", () => {
 });
 
 // Objects
-class Object {
-    constructor(x, y, radius, color) {
+class Circle {
+    constructor(x, y, dx, dy, radius, color) {
         this.x = x;
         this.y = y;
+        this.dx = dx;
+        this.dy = dy;
         this.radius = radius;
         this.color = color;
     }
@@ -57,17 +60,26 @@ class Object {
     }
 
     update() {
+        this.y += this.dy;
         this.draw();
     }
 }
 
 // Implementation
-let objects;
 function init() {
-    objects = [];
+    circlesArray = [];
+    let x = canvas.width / 2;
+    let y = 0;
+    let radius;
+    let color;
+    let dx = 0;
+    let dy;
 
-    for (let i = 0; i < 400; i++) {
-        // objects.push()
+    for (let i = 0; i < 500; i++) {
+        dy = randomIntFromRange(1, 550) / 7;
+        radius = randomIntFromRange(1, 15);
+        color = randomColor(colorsArray);
+        circlesArray.push(new Circle(x, y, dx, dy, radius, color));
     }
 }
 
@@ -75,9 +87,9 @@ function init() {
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
-    // objects.forEach(object => {
-    //  object.update()
-    // })
+    circlesArray.forEach((circle) => {
+        circle.update();
+    });
 }
 
 init();
