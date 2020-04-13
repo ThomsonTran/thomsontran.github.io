@@ -5,8 +5,8 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const mouse = {
-    x: 0,
-    y: 0,
+    x: undefined,
+    y: undefined,
 };
 
 const colorsArray = ["#E68E99", "#7888E6", "#E8C75D", "#6CE686", "#6074E6"];
