@@ -35,6 +35,11 @@ addEventListener("mousemove", (event) => {
     mouse.y = event.clientY;
     init();
 });
+addEventListener("touchmove", (event) => {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+    init();
+});
 
 addEventListener("resize", () => {
     canvas.width = innerWidth;
@@ -61,7 +66,7 @@ class Circle {
     }
 
     update() {
-        this.radius -= 0.1;
+        this.radius -= 0.2;
         this.radius = Math.max(0, this.radius);
         this.draw();
     }
@@ -76,7 +81,7 @@ function init() {
     let dx = 0;
     let dy;
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 2; i++) {
         x = mouse.x + randomIntFromRange(-1, 1) * randomIntFromRange(1, 50);
         y = mouse.y + randomIntFromRange(-1, 1) * randomIntFromRange(1, 50);
         dy = randomIntFromRange(1, 5);
