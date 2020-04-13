@@ -9,8 +9,8 @@ const mouse = {
     y: 0,
 };
 
-const colorsArray = ["#E0E79F", "#6CAA84", "#3E595F", "#493A4D", "#21172E"];
-let circlesArray;
+const colorsArray = ["#E68E99", "#7888E6", "#E8C75D", "#6CE686", "#6074E6"];
+let circlesArray = [];
 
 // global functions
 
@@ -33,6 +33,7 @@ function distance(x1, y1, x2, y2) {
 addEventListener("mousemove", (event) => {
     mouse.x = event.clientX;
     mouse.y = event.clientY;
+    init();
 });
 
 addEventListener("resize", () => {
@@ -60,24 +61,27 @@ class Circle {
     }
 
     update() {
-        this.y += this.dy;
+        this.radius -= 0.1;
+        this.radius = Math.max(0, this.radius);
         this.draw();
     }
 }
 
 // Implementation
 function init() {
-    circlesArray = [];
-    let x = canvas.width / 2;
-    let y = 0;
+    let x;
+    let y;
     let radius;
     let color;
     let dx = 0;
     let dy;
 
-    for (let i = 0; i < 500; i++) {
-        dy = randomIntFromRange(1, 550) / 7;
-        radius = randomIntFromRange(1, 15);
+    for (let i = 0; i < 1; i++) {
+        x = mouse.x + randomIntFromRange(-1, 1) * randomIntFromRange(1, 50);
+        y = mouse.y + randomIntFromRange(-1, 1) * randomIntFromRange(1, 50);
+        dy = randomIntFromRange(1, 5);
+        dx = randomIntFromRange(1, 5);
+        radius = randomIntFromRange(1, 25);
         color = randomColor(colorsArray);
         circlesArray.push(new Circle(x, y, dx, dy, radius, color));
     }
