@@ -39,7 +39,6 @@ class Particle {
     }
 
     break() {
-        this.radius = Math.max(0, this.radius - 3);
         for (let index = 0; index < 8; index++) {
             let smallradius = this.radius / 4;
             let speedx = randomIntBetween(-15, 15);
@@ -55,6 +54,7 @@ class Particle {
                 )
             );
         }
+        this.radius = Math.max(0, this.radius - 3);
     }
 
     draw() {
@@ -88,7 +88,7 @@ class Particle {
             this.speed.y += this.gravity;
         }
         this.y += this.speed.y;
-        this.x += this.speed.x * 0.9;
+        this.x += this.speed.x * this.friction;
         this.draw();
     }
 }
