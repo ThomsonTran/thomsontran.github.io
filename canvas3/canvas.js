@@ -137,8 +137,9 @@ class SmallParticle extends Particle {
 
 function init() {
     let x = randomIntBetween(50, canvas.width - 50);
+    let dx = randomIntBetween(-10, 10);
 
-    particles.push(new Particle(x, 0, 10, 20, 15, color));
+    particles.push(new Particle(x, 0, dx, 20, 15, color));
 }
 
 var backgroundGradient = c.createLinearGradient(0, 0, 0, canvas.height);
@@ -153,7 +154,7 @@ backgroundGradient.addColorStop(1, "#101a3b");
 function animate() {
     timer++;
 
-    if (timer % 200 == 0) {
+    if (timer % 150 == 0) {
         init();
     }
     requestAnimationFrame(animate);
